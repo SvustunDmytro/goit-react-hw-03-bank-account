@@ -1,0 +1,21 @@
+/* your css code */
+
+.BalanceWrapper {
+  display: block;
+  margin: 0 auto;
+}
+
+.clientBalance {
+  width: 400px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  height: 90px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.clientBalance__col {
+  width: 33%;
+}

@@ -1,0 +1,15 @@
+/* your css code */
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  background-color: blue;
+}
+
+.controls {
+  display: block;
+  margin: 10px;
+  cursor: pointer;
+}

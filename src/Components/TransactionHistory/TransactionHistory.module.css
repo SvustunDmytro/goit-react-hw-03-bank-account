@@ -1,0 +1,38 @@
+/* your css code */
+.table {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+table {
+  display: block;
+  width: 870px;
+  margin: 0 auto;
+}
+
+thead {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  background-color: #bbbbbb;
+}
+
+tbody {
+  width: 870px;
+}
+
+tr {
+  display: flex;
+  width: 100%;
+}
+
+td {
+  width: 33%;
+  height: 70px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+}
