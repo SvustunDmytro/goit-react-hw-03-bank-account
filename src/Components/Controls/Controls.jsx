@@ -10,29 +10,24 @@ export default class Controls extends Component {
 
   handleChange = e => {
     this.setState({
-      [e.target.name]: e.target.value,
+      [e.target.name]: Number(e.target.value),
     });
   };
 
   handleSubmitAdd = event => {
     event.preventDefault();
-
-    this.props.onAddTransaction({ ...this.state });
-  };
-
-  handleSubmitWith = event => {
-    event.preventDefault();
-
-    this.props.onWithdrawTransaction({ ...this.state });
+    this.props.onAddTransaction({ ...this.state }, event);
+    this.setState({ amount: 0 });
   };
 
   render() {
     return (
       <form className={styles.form}>
-        <input type="number" name="amount" onChange={this.handleChange} />
+        <input type="number" name="amount" onInput={this.handleChange} />
         <button
           className={styles.controls}
           type="submit"
+          name="deposit"
           onClick={this.handleSubmitAdd}
         >
           Deposit
@@ -40,7 +35,8 @@ export default class Controls extends Component {
         <button
           className={styles.controls}
           type="submit"
-          onClick={this.handleSubmitWith}
+          name="withdrawal"
+          onClick={this.handleSubmitAdd}
         >
           Withdraw
         </button>
@@ -51,5 +47,4 @@ export default class Controls extends Component {
 
 Controls.propTypes = {
   onAddTransaction: PropTypes.func.isRequired,
-  onWithdrawTransaction: PropTypes.func.isRequired,
 };

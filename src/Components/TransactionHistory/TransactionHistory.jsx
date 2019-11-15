@@ -12,14 +12,16 @@ const TransactionHistory = ({ items }) => (
           <td>DATE</td>
         </tr>
       </thead>
-      {items.length > 0 &&
-        items.map(el => (
-          <tr key={el.id}>
-            <td>{el.type}</td>
-            <td>{el.amount}</td>
-            <td>{el.date}</td>
-          </tr>
-        ))}
+      <tbody>
+        {items.length > 0 &&
+          items.map(el => (
+            <tr key={el.id}>
+              <td>{el.type}</td>
+              <td>{Number(el.amount).toFixed(2)}&#36;</td>
+              <td>{el.date}</td>
+            </tr>
+          ))}
+      </tbody>
     </table>
   </div>
 );
@@ -27,7 +29,7 @@ const TransactionHistory = ({ items }) => (
 TransactionHistory.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
-      amount: PropTypes.string.isRequired,
+      amount: PropTypes.number.isRequired,
       id: PropTypes.string.isRequired,
       type: PropTypes.string.isRequired,
       date: PropTypes.string.isRequired,
