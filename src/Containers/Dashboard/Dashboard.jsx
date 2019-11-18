@@ -47,8 +47,7 @@ export default class Dashboard extends Component {
   notifyNoCost = () =>
     toast('На счету недостаточно средств для проведения операции!');
 
-  onAddTransaction = (trans, event) => {
-    const date = new Date();
+  addDateTransaction = () => {
     const options = {
       year: 'numeric',
       month: 'numeric',
@@ -57,31 +56,32 @@ export default class Dashboard extends Component {
       minute: 'numeric',
       second: 'numeric',
     };
+    return new Date().toLocaleDateString('en-US', options);
+  };
+
+  onAddTransaction = (trans, event) => {
+    const { name } = event;
     const transaction = {
       amount: trans.amount,
       id: uuidv4(),
       type: event.target.name,
-      date: date.toLocaleDateString('en-US', options),
+      date: this.addDateTransaction(),
     };
     if (trans.amount <= 0) {
       this.notifyNoInputValue();
       return;
     }
-    if (event.target.name === 'withdrawal') {
-      if (this.state.balance < trans.amount) {
-        this.notifyNoCost();
-        return;
-      }
-      this.setState(state => ({
-        transactions: [...state.transactions, transaction],
-        balance: state.balance - trans.amount,
-      }));
-    } else if (event.target.name === 'deposit') {
-      this.setState(state => ({
-        transactions: [...state.transactions, transaction],
-        balance: state.balance + trans.amount,
-      }));
+    if (this.state.balance < trans.amount) {
+      this.notifyNoCost();
+      return;
     }
+    this.setState(state => ({
+      transactions: [...state.transactions, transaction],
+      balance:
+        name === 'withdrawal'
+          ? state.balance - trans.amount
+          : state.balance + trans.amount,
+    }));
     event.target.parentNode.reset();
   };
 
